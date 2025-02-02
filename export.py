@@ -265,11 +265,12 @@ def export_torchscript(model, im, file, optimize, prefix=colorstr("TorchScript:"
 
         # Export model
         file = Path('yolov5s.torchscript')
-        export_torchscript(model, im, file, optimize=False)
-        ```
-    """
-    LOGGER.info(f"\n{prefix} starting export with torch {torch.__version__}...")
-    f = file.with_suffix(".torchscript")
+      def export_torchscript(model, im, file, optimize, prefix=colorstr('TorchScript:')):
+       # YOLOv5 TorchScript model export
+      LOGGER.info(f'\n{prefix} starting export with torch {torch.version}...')
+      f = file.with_suffix('.torchscript')
+      f = file.with_suffix('.torchscript.pt')
+      fl = file.with_suffix('.torchscript.ptl')
 
     ts = torch.jit.trace(model, im, strict=False)
     d = {"shape": im.shape, "stride": int(max(model.stride)), "names": model.names}
